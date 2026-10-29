@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}Mi Perfil | El Blog de Michi{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Columna Izquierda: Información y Edición del Perfil -->
+    <div class="col-lg-5 mb-4">
+        <div class="card card-custom p-4">
+            <div class="text-center mb-3">
+                <div class="display-3 text-secondary">
+                    <i class="bi bi-person-circle"></i>
+                </div>
+                <h2 class="h4 fw-bold mt-2 text-dark">{{ user.username }}</h2>
+                <p class="badge bg-warning text-dark">Miembro desde {{ user.date_joined|date:"d M Y" }}</p>
+            </div>
+
+            <hr>
+
+            <h3 class="h5 fw-bold text-dark mb-3">Editar Datos Personales</h3>
+            <form method="POST">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger py-2 small">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <div class="mb-3">
+                    <label for="{{ form.first_name.id_for_label }}" class="form-label small fw-bold">Nombre</label>
+                    {{ form.first_name }}
+                    {% if form.first_name.errors %}
+                        <div class="text-danger small mt-1">{{ form.first_name.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.last_name.id_for_label }}" class="form-label small fw-bold">Apellido</label>
+                    {{ form.last_name }}
+                    {% if form.last_name.errors %}
+                        <div class="text-danger small mt-1">{{ form.last_name.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.email.id_for_label }}" class="form-label small fw-bold">Correo Electrónico *</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <div class="text-danger small mt-1">{{ form.email.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="d-grid mt-4">
+                    <button type="submit" class="btn btn-michi">
+                        <i class="bi bi-check-circle"></i> Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Columna Derecha: Publicaciones del usuario -->
+    <div class="col-lg-7">
+        <div class="card card-custom p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="h5 fw-bold text-dark mb-0">Mis Publicaciones</h3>
+                <a href="{% url 'blog:crear_post' %}" class="btn btn-sm btn-michi">
+                    <i class="bi bi-plus-circle"></i> Nueva Publicación
+                </a>
+            </div>
+
+            {% if posts %}
+                <div class="list-group list-group-flush">
+                    {% for p in posts %}
+                        <div class="list-group-item px-0 py-3 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
+                            <div>
+                                <h6 class="mb-1 fw-bold">
+                                    <a href="{% url 'blog:detalle_post' p.pk %}" class="text-decoration-none text-dark">
+                                        {{ p.titulo }}
+                                    </a>
+                                </h6>
+                                <small class="text-muted">
+                                    <i class="bi bi-calendar3"></i> {{ p.fecha_creacion|date:"d M Y - H:i" }}
+                                </small>
+                            </div>
+                            <div class="btn-group btn-group-sm">
+                                <a href="{% url 'blog:detalle_post' p.pk %}" class="btn btn-outline-secondary" title="Ver">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <a href="{% url 'blog:editar_post' p.pk %}" class="btn btn-outline-primary" title="Editar">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="{% url 'blog:eliminar_post' p.pk %}" class="btn btn-outline-danger" title="Eliminar">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="text-center py-4 text-muted">
+                    <i class="bi bi-journal-x fs-1 mb-2"></i>
+                    <p class="mb-2">Aún no has escrito ninguna publicación sobre Michi.</p>
+                    <a href="{% url 'blog:crear_post' %}" class="btn btn-sm btn-outline-secondary">
+                        Crear tu primer post
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
