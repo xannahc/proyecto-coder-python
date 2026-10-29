@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.titulo }} | El Blog de Michi{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <div class="card card-custom p-4 p-md-5 mb-4">
+            
+            <!-- Encabezado del post -->
+            <div class="mb-4 pb-3 border-bottom">
+                <span class="badge bg-warning text-dark mb-2">🐾 Aventura Felina</span>
+                <h1 class="display-6 fw-bold text-dark">{{ post.titulo }}</h1>
+                {% if post.subtitulo %}
+                    <h2 class="h5 text-muted fst-italic mt-2">{{ post.subtitulo }}</h2>
+                {% endif %}
+                <div class="d-flex align-items-center text-muted small mt-3">
+                    <span class="me-3"><i class="bi bi-person-circle"></i> Publicado por: <strong>{{ post.autor.username }}</strong></span>
+                    <span><i class="bi bi-clock"></i> {{ post.fecha_creacion|date:"d \d\e F \d\e Y - H:i" }}</span>
+                </div>
+            </div>
+
+            <!-- Imagen del post (resiste si falta la imagen) -->
+            {% if post.imagen %}
+                <div class="text-center mb-4">
+                    <img src="{{ post.imagen.url }}" alt="{{ post.titulo }}" class="img-fluid rounded-4 shadow-sm" style="max-height: 480px; width: 100%; object-fit: cover;">
+                </div>
+            {% endif %}
+
+            <!-- Contenido del post -->
+            <div class="fs-5 lh-lg text-secondary mb-5">
+                {{ post.contenido|linebreaks }}
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="d-flex flex-wrap justify-content-between align-items-center pt-3 border-top gap-2">
+                <a href="{% url 'blog:inicio' %}" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> Volver a publicaciones
+                </a>
+
+                {% if user.is_authenticated %}
+                    <div class="btn-group">
+                        <a href="{% url 'blog:editar_post' post.pk %}" class="btn btn-outline-primary">
+                            <i class="bi bi-pencil"></i> Editar
+                        </a>
+                        <a href="{% url 'blog:eliminar_post' post.pk %}" class="btn btn-outline-danger">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
