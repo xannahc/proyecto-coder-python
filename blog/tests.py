@@ -7,14 +7,14 @@ class BlogTests(TestCase):
     def setUp(self):
         self.client = Client()
         self.usuario = User.objects.create_user(
-            username='michifan',
-            email='michi@test.com',
+            username='felixfan',
+            email='felix@test.com',
             password='Password123!'
         )
         self.post = Post.objects.create(
             titulo='Aventura con una pluma',
             subtitulo='El juguete favorito',
-            contenido='Michi saltó más de un metro persiguiendo una pluma.',
+            contenido='Felix saltó más de un metro persiguiendo una pluma.',
             autor=self.usuario
         )
 
@@ -28,7 +28,7 @@ class BlogTests(TestCase):
         """Verifica que la página de detalle muestre el contenido del post"""
         response = self.client.get(reverse('blog:detalle_post', kwargs={'pk': self.post.pk}))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Michi saltó más de un metro')
+        self.assertContains(response, 'Felix saltó más de un metro')
 
     def test_crear_post_requiere_login(self):
         """Verifica que un usuario anónimo sea redirigido al intentar crear un post"""
@@ -50,11 +50,11 @@ class BlogTests(TestCase):
 
     def test_usuario_autenticado_puede_crear_post(self):
         """Verifica que un usuario autenticado pueda crear un post correctamente"""
-        self.client.login(username='michifan', password='Password123!')
+        self.client.login(username='felixfan', password='Password123!')
         response = self.client.post(reverse('blog:crear_post'), {
             'titulo': 'Nuevo post de prueba',
             'subtitulo': 'Subtítulo de prueba',
-            'contenido': 'Contenido de prueba sobre Michi durmiendo.',
+            'contenido': 'Contenido de prueba sobre Felix durmiendo.',
         })
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Post.objects.filter(titulo='Nuevo post de prueba').exists())
@@ -75,4 +75,4 @@ class BlogTests(TestCase):
         """Verifica que la página Acerca de cargue correctamente"""
         response = self.client.get(reverse('blog:acerca_de'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Conoce a Michi')
+        self.assertContains(response, 'Conoce a Felix')

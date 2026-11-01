@@ -8,7 +8,7 @@ class PostForm(forms.ModelForm):
         widgets = {
             'titulo': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Ej: Las siestas de Michi en el sillón'
+                'placeholder': 'Ej: Las siestas de Felix en el sillón'
             }),
             'subtitulo': forms.TextInput(attrs={
                 'class': 'form-control',

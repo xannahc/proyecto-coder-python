@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ post.titulo }} | El Blog de Michi{% endblock %}
+{% block title %}{{ post.titulo }} | El Blog de Felix{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
@@ -9,7 +9,7 @@
             
             <!-- Encabezado del post -->
             <div class="mb-4 pb-3 border-bottom">
-                <span class="badge bg-warning text-dark mb-2">🐾 Aventura Felina</span>
+                <span class="badge bg-warning text-dark mb-2">Aventura Felina</span>
                 <h1 class="display-6 fw-bold text-dark">{{ post.titulo }}</h1>
                 {% if post.subtitulo %}
                     <h2 class="h5 text-muted fst-italic mt-2">{{ post.subtitulo }}</h2>

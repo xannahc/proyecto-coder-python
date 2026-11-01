@@ -1,4 +1,4 @@
-/* Estilos generales para El Blog de Michi */
+/* Estilos generales para El Blog de Felix */
 body {
     font-family: 'Nunito', sans-serif;
     background-color: #faf7f2;
@@ -6,7 +6,7 @@ body {
 }
 
 /* Barra de navegación temática */
-.bg-michi {
+.bg-felix {
     background-color: #cf5c36 !important;
 }
 
@@ -68,25 +68,25 @@ body {
 }
 
 /* Botones con estilo cálido */
-.btn-michi {
+.btn-felix {
     background-color: #cf5c36;
     color: #ffffff;
     border: none;
     font-weight: 600;
 }
 
-.btn-michi:hover {
+.btn-felix:hover {
     background-color: #b34a26;
     color: #ffffff;
 }
 
-.btn-michi-outline {
+.btn-felix-outline {
     border: 2px solid #cf5c36;
     color: #cf5c36;
     font-weight: 600;
 }
 
-.btn-michi-outline:hover {
+.btn-felix-outline:hover {
     background-color: #cf5c36;
     color: #ffffff;
 }
