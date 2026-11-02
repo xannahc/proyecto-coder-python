@@ -1,8 +1,8 @@
-# El Blog de Felix — Las Aventuras de mi Gato
+# El Blog de Felix — Las aventuras de mi gato
 
 Proyecto final para el curso de **Python** de **Coderhouse**.
 
-Un blog web interactivo y sencillo dedicado a relatar las anécdotas, siestas y travesuras de mi gato Felix. La aplicación permite a los usuarios leer historias, registrarse, iniciar sesión, crear sus propias publicaciones con fotos y administrar su perfil.
+Un blog web interactivo y sencillo dedicado a relatar las anécdotas, y travesuras de mi gato Felix. La aplicación permite a los usuarios leer historias, registrarse, iniciar sesión, crear sus propias publicaciones con fotos y administrar su perfil.
 
 ---
 
